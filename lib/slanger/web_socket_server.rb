@@ -12,7 +12,8 @@ module Slanger
           host:    Slanger::Config[:websocket_host],
           port:    Slanger::Config[:websocket_port],
           debug:   Slanger::Config[:debug],
-          app_key: Slanger::Config[:app_key]
+          app_key: Slanger::Config[:app_key],
+          secure_proxy: Slanger::Config[:secure_proxy],
         }
 
         if Slanger::Config[:tls_options]

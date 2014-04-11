@@ -63,6 +63,10 @@ OptionParser.new do |opts|
     options[:activity_timeout] = t
   end
 
+  opts.on "-d" "--secure_proxy", "Running behind a secure SSL proxy/terminator" do |d|
+    options[:secure_proxy] = true
+  end
+
   opts.parse!
 
   %w<app_key secret>.each do |parameter|
