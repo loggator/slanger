@@ -1,13 +1,8 @@
 # Slanger
-![stop](/stop.png)
-Don't do this
-==============
-```
-gem 'slanger'
-```
 
-Do this:
---------
+**Important! Slanger is not supposed to be included in your Gemfile. RubyGems is used as a distribution mechanism. If you include it in your app, you will likely get dependency conflicts. PRs updating dependencies for compatibility with your app will be closed. Thank you for reading and enjoy Slanger!**
+
+##Typical usage
 
 ```
 gem install slanger
@@ -15,26 +10,10 @@ redis-server &> /dev/null &
 
 slanger --app_key 765ec374ae0a69f4ce44 --secret your-pusher-secret
 ```
-![happy snake](/happy_snake.jpg)
-
-If you submit a pull request, please don't be these people:
-[#109](https://github.com/stevegraham/slanger/pull/109)
-[#108](https://github.com/stevegraham/slanger/pull/108)
-[#83](https://github.com/stevegraham/slanger/pull/83)
-[#81](https://github.com/stevegraham/slanger/pull/81)
-[#72](https://github.com/stevegraham/slanger/pull/72)
-[#4](https://github.com/stevegraham/slanger/pull/4)
-
-I'll try to politely close any new ones, but there's been [RUBY_DRAMA](https://github.com/stevegraham/slanger/pull/81#issuecomment-10176961) about this issue, 
-but basically,
-
-Slanger is intended as a server that is easy to install, not a gem inside Rails or Sinatra.
-
-##Typical usage
 
 Slanger is a standalone server ruby implementation of the Pusher protocol.  It
 is not designed to run inside a Rails or sinatra app, but it can be easily
-installed as a gem. 
+installed as a gem.
 
 Bundler has multiple purposes, one of which is useful for installation.
 
@@ -77,17 +56,17 @@ Slanger is packaged as a Rubygem. Installing the gem makes the 'slanger' executa
 
 __IMPORTANT:__ Redis must be running where Slanger expects it to be (either on localhost:6379 or somewhere else you told Slanger it would be using the option flag) or Slanger will fail silently. I haven't yet figured out how to get em-hiredis to treat an unreachable host as an error
 
-<pre>
+```bash
 $ gem install slanger
 
 $ redis-server &> /dev/null &
 
 $ slanger --app_key 765ec374ae0a69f4ce44 --secret your-pusher-secret
-</pre>
+```
 
 If all went to plan you should see the following output to STDOUT
 
-<pre>
+```
 
     .d8888b.  888
    d88P  Y88b 888
@@ -104,8 +83,7 @@ If all went to plan you should see the following output to STDOUT
 
 Slanger API server listening on port 4567
 Slanger WebSocket server listening on port 8080
-
-</pre>
+```
 
 ## Modifying your application code to use the Slanger service
 
@@ -114,18 +92,16 @@ Once you have a Slanger instance listening for incoming connections you need to 
 
 First you will need to add code to your server side component that publishes events to the Pusher HTTP REST API, usually this means telling the Pusher client to use a different host and port, e.g. consider this Ruby example
 
-<pre>
+```ruby
 ...
 
 Pusher.host   = 'slanger.example.com'
 Pusher.port   = 4567
-
-</pre>
+```
 
 You will also need to do the same to the Pusher JavaScript client in your client side JavaScript, e.g
 
-<pre>
-
+```javascript
 <script type="text/javascript">
   ...
 
@@ -134,7 +110,7 @@ You will also need to do the same to the Pusher JavaScript client in your client
   Pusher.wss_port = 8080
 
 </script>
-</pre>
+```
 
 Of course you could proxy all requests to `ws.example.com` to port 8080 of your Slanger node and `api.example.com` to port 4567 of your Slanger node for example, that way you would only need to set the host property of the Pusher client.
 
@@ -142,7 +118,7 @@ Of course you could proxy all requests to `ws.example.com` to port 8080 of your 
 
 Slanger supports several configuration options, which can be supplied as command line arguments at invocation.
 
-<pre>
+```
 -k or --app_key This is the Pusher app key you want to use. This is a required argument
 
 -s or --secret This is your Pusher secret. This is a required argument
@@ -162,7 +138,7 @@ Slanger supports several configuration options, which can be supplied as command
 -c or --cert_file Certificate file for SSL support. This argument is optional, if given, SSL will be enabled
 
 -v or --[no-]verbose This makes Slanger run verbosely, meaning WebSocket frames will be echoed to STDOUT. Useful for debugging
-</pre>
+```
 
 
 # Why use Slanger instead of Pusher?
