@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency                "signature",        "~> 0.1.6"
   s.add_dependency                "activesupport",    ">= 4.0.0"
   s.add_dependency                "sinatra",          "~> 1.4.4"
-  s.add_dependency                "thin",             "~> 1.6.0"
+  s.add_dependency                "thin",             "~> 1.7.0"
   s.add_dependency                "em-http-request",  "~> 0.3.0"
   s.add_dependency		            "oj",		            "~> 2.0"
 
